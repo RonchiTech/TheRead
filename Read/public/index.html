@@ -7,10 +7,13 @@
 <body>
  <h4> Welcome <span id ="userName"></span></h4>
  <p> What is your role: </p>
- <div> <input type="text" id = "clientStatus" maxlength="10"></div>
+ <div> <select name="roles" id = "clientStatus" maxlength="10"></div>
+   <option value="teacher">Teacher</option>
+   <option value="student">Student</option>
+ </select>
  <p> You are a: </p>
  <div id ="role"></div>
-
+<button type="button" onclick="logout()">Logout</button>
 
 <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-auth.js"></script>
