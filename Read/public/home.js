@@ -46,33 +46,25 @@ function app(user){
 //   var statuz = (snapshot.val() && snapshot.val().status);
 // });
   // document.getElementById("useROLE").innerHTML = user.status;
-  document.getElementById('userName').innerHTML = user.displayName;
-  document.getElementById("clientStatus").addEventListener("input",updateMyStatus);
-  document.getElementById("useROLE").innerHTML = user.status;
-  var useROLE = document.getElementById("useROLE");
+  document.getElementById('homeName').innerHTML = user.displayName;
+  document.getElementById("homeRole").innerHTML = user.status;
+  var useROLE = document.getElementById("homeRole");
   var fb = firebase.database().ref('Accounts');
   var fbstat = firebase.database().ref().child('Accounts/' + user.uid +'/status');
   fbstat.on('value',function(datasnapshot){
-    useROLE.innerHTML = datasnapshot.val();
+    homeRole.innerHTML = datasnapshot.val();
 
-    if (useROLE.innerHTML != "" && useROLE.innerHTML != null){
-      window.location.href = 'home.html';
-    } else {
-      window.location.href = 'index.html';
-    }
+if(homeRole.innerHTML == "teacher"){
+  document.getElementById('jobRole').innerHTML = "Create Classroom";
+} else {
+  document.getElementById('jobRole').innerHTML = "View Classroom";
+}
+
 
 
 
   });
 
-  function updateMyStatus(e){
-    var myUpdate={};
-    myUpdate.email = user.email;
-    myUpdate.displayName = user.displayName;
-    myUpdate.status = document.getElementById("clientStatus").value;
-    fb.child(user.uid).set(myUpdate);
-
-  }
 
 
 }
