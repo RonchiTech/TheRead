@@ -1,0 +1,46 @@
+<!Doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Read University Home</title>
+</head>
+<body>
+ <h4> Welcome: <span id ="homeName"></span></h4>
+ <h4>Role: <span id = "homeRole"></span></h4>
+ <br>
+ <br>
+ <h3><span id = "jobRole"></span></h3>
+ <input type="text" id="classroomName"/>
+ <div id ="teacher_btn">
+<button id="creat_classBTN">Create</button>
+</div>
+<!-- <button id = "createClassRoom" onclick="createClasses()">Create</button>  -->
+</br>
+ <h3><span id = "ListClass"></span></h3>
+ <div id="myList"></div>
+ 
+
+ <br> <br>
+ <span ></span>
+<button type="button" onclick="logout()">Logout</button>
+
+<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-database.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBBfUML5q_-TEl3aOX-yzNhmbIHvQ6FHP8",
+    authDomain: "capstone-abea9.firebaseapp.com",
+    databaseURL: "https://capstone-abea9.firebaseio.com",
+    projectId: "capstone-abea9",
+    storageBucket: "capstone-abea9.appspot.com",
+    messagingSenderId: "512230966749"
+  };
+  firebase.initializeApp(config);
+</script>
+
+<script src="home.js"></script>
+
+</body>
+</html>
