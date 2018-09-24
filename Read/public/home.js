@@ -35,26 +35,15 @@ function login(){
   }
 
 function app(user){
-  //user.displayName
-  //user.email
-  //user.uid
-  // var user_roles = document.getElementById('clientStatus');
-  // user_roles.style.display = 'none';
-  // document.getElementById('role')
-//   var userId = firebase.auth().currentUser.uid;
-//   return firebase.database().ref('/Accounts/' + userId).on('value').then(function(snapshot) {
-//   var statuz = (snapshot.val() && snapshot.val().status);
-// });
-  // document.getElementById("useROLE").innerHTML = user.status;
-  // document.getElementById("createClassRoom").style.display = "none";
-
-  // document.getElementById("createClassRoom").style.display = "none";
   document.getElementById("teacher_btn").style.display="none";
+  document.getElementById("stud_btn").style.display="none";
   document.getElementById("classroomName").style.display = "none";
+  document.getElementById("classroomID").style.display = "none";
   document.getElementById("ListClass").style.display = "none";
   document.getElementById('ListClass').innerHTML = "Classroom:";
   document.getElementById('homeName').innerHTML = user.displayName;
   document.getElementById("homeRole").innerHTML = user.status;
+
   var classuid = generateId();
   var useROLE = document.getElementById("homeRole");
   var fbclass = firebase.database().ref().child('Classes');
@@ -62,96 +51,114 @@ function app(user){
   fbstat.on('value',function(datasnapshot){
     homeRole.innerHTML = datasnapshot.val();
 
-if(homeRole.innerHTML == "Teacher"){
-  document.getElementById("teacher_btn").style.display="initial";
-  document.getElementById('jobRole').innerHTML = "Create Classroom";
-  document.getElementById("classroomName").style.display = "initial";
-  document.getElementById("ListClass").style.display = "initial";
-  document.getElementById("creat_classBTN").addEventListener("click",classcreation);
 
-  // document.getElementById("createClassRoom").style.display = "initial";
-} else if(homeRole.innerHTML == "" && homeRole.innerHTML ==null) {
-  window.location.href = 'index.html';
-}   else {
-  document.getElementById('jobRole').innerHTML = "View Classroom";
-}
+    if(homeRole.innerHTML == "Teacher"){
+      document.getElementById("teacher_btn").style.display="initial";
+      document.getElementById("stud_btn").style.display="none";
+      document.getElementById('jobRole').innerHTML = "Create Classroom";
+      document.getElementById("classroomName").style.display = "initial";
+      document.getElementById("classroomID").style.display = "none";
+      document.getElementById("ListClass").style.display = "initial";
+      document.getElementById("creat_classBTN").addEventListener("click",classcreation);
 
-  });
+      }
+      else if(homeRole.innerHTML == "Student"){
+        document.getElementById("teacher_btn").style.display="none";
+        document.getElementById("stud_btn").style.display="initial";
+        document.getElementById('jobRole').innerHTML = "Add Classroom";
+        document.getElementById("classroomName").style.display = "none";
+        document.getElementById("classroomID").style.display = "initial";
+        document.getElementById("ListClass").style.display = "initial";
+        document.getElementById("add_classBTN").addEventListener("click",addclass);
 
+      }
+      else
+       // if(homeRole.innerHTML == "" && homeRole.innerHTML ==null)
+      {
+          window.location.href = 'index.html';
 
-
-
-  function classcreation(q) {
-    var checkcn = document.getElementById('classroomName').value;
-    if(checkcn == "" && checkcn == null){
-      alert("Empty Class Name!!");
-    }else {
-    var usuid = generateId();
-    var myClasses={};
-    myClasses.TheClass = document.getElementById('classroomName').value;
-    myClasses.Teacher = user.displayName;
-    myClasses.TeacherID = user.uid;
-    myClasses.ClassID = usuid;
-    fbclass.child(user.uid).push().set(myClasses);
-    // var xx = document.getElementById('classroomName').value;
-    // document.getElementById('ListClass').innerHTML = x;
-}
-  }
-  var userRef = firebase.database().ref().child('Classes' + '/' + user.uid);
-  userRef.on('child_added', function(data) {
-
-  var roomNames = data.val().TheClass;
-  var titsNames = data.val().Teacher;
-  var classD = data.val().ClassID;
-
-  var ul = document.createElement('ul');
-
-
-  document.getElementById('myList').appendChild(ul);
-
-
-  var li = document.createElement('li');
-  var lit = document.createElement('ulok');
-  ul.appendChild(li);
-
-
-  Object.keys(roomNames).forEach(function(key){
-       li.innerHTML += '<span onclick="clickDone(this)">'+roomNames[key]+'</span><ul style="display:none"><li>Class Id : '+classD+'</li><li>Teacher : '+titsNames+'</li></ul>';
-
+      }
       });
 
+         function addclass(){
+           // var getClassID = document.getElementById("classroomID").value
+           // console.log(getClassID);
+           var addclassID = document.getElementById("classroomID").value;
+           var teacherUID = document.getElementById("teachID").value;
+           var studentUID = user.uid;
+           var studentName = user.displayName;
+           var classRef = firebase.database().ref().child('Classes').child(teacherUID).child(addclassID);
+           var studentsRef = classRef.child("MyStudents");
+           studentsRef.child(studentUID).set({ Studentname: studentName });
+         }
 
-  });
+        function classcreation(q)
+        {
+            var checkcn = document.getElementById('classroomName').value;
+            if(checkcn == "" && checkcn == null){
+                alert("Empty Class Name!!");
+                }
+                else {
+                  var usuid = generateId();
+                  var myClasses={};
+                  myClasses.TheClass = document.getElementById('classroomName').value;
+                  myClasses.Teacher = user.displayName;
+                  myClasses.TeacherID = user.uid;
+                  myClasses.ClassID = usuid;
+                  fbclass.child(user.uid).push().set(myClasses);
+                    }
+          }
+            var userRef = firebase.database().ref().child('Classes' + '/' + user.uid);
+            userRef.on('child_added', function(data)
+            {
+                  var roomNames = data.val().TheClass;
+                  var Studentx = data.val().TheStudents;
+                  var classD = data.val().ClassID;
+                  var ul = document.createElement('ul');
+                  document.getElementById('myList').appendChild(ul);
+                  var li = document.createElement('li');
+                  ul.appendChild(li);
+
+                  Object.keys(roomNames).forEach(function(key)
+                  {
+                      li.innerHTML += '<span onclick="clickDone(this)">'+roomNames[key]+'</span><ul style="display:none"><li>Class Id : '+classD+'</li><li>Students : '+Studentx+'</li></ul>';
+                    });
+                  });
+
+                    function errData(err)
+                     {
+                        console.log('Error!');
+                        console.log(err);
+
+                      }
+
+                      function generateId()
+                      {
+                        return 'xxxx-xxxx-xxxx'.replace(/[x]/g, function()
+                        {
+                        return (Math.random() * 9 | 0 ).toString();
+                        })
+                      }
+
+                      function reload_page()
+                      {
+                        window.location.reload();
+                      }
 
 
-  function errData(err) {
-    console.log('Error!');
-    console.log(err);
 
-  }
+                    }
 
+                    window.onload = login;
 
-  function generateId(){
-    return 'xxxx-xxxx-xxxx'.replace(/[x]/g, function(){
-      return (Math.random() * 9 | 0 ).toString();
-    })
-  }
-
-  function reload_page(){
-   window.location.reload();
-  }
-
-
-
-}
-
-window.onload = login;
-
-function clickDone(thisVar){
-  var is = thisVar.nextSibling.style.display;
-  if(is == 'none'){
-    thisVar.nextSibling.style.display = 'initial';
-  }else{
-    thisVar.nextSibling.style.display = 'none';
-  }
-}
+                    function clickDone(thisVar)
+                    {
+                      var is = thisVar.nextSibling.style.display;
+                      if(is == 'none')
+                      {
+                      thisVar.nextSibling.style.display = 'initial';
+                      }
+                      else{
+                        thisVar.nextSibling.style.display = 'none';
+                          }
+                    }

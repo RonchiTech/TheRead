@@ -5,24 +5,35 @@
   <title>Read University Home</title>
 </head>
 <body>
- <h4> Welcome: <span id ="homeName"></span></h4>
- <h4>Role: <span id = "homeRole"></span></h4>
- <br>
- <br>
- <h3><span id = "jobRole"></span></h3>
- <input type="text" id="classroomName"/>
- <div id ="teacher_btn">
-<button id="creat_classBTN">Create</button>
-</div>
-<!-- <button id = "createClassRoom" onclick="createClasses()">Create</button>  -->
-</br>
- <h3><span id = "ListClass"></span></h3>
- <div id="myList"></div>
- 
+    <h4> Welcome: <span id ="homeName"></span></h4>
+    <h4>Role: <span id = "homeRole"></span></h4>
+    <br>
+    <br>
+    <h3><span id = "jobRole"></span></h3>
 
- <br> <br>
- <span ></span>
-<button type="button" onclick="logout()">Logout</button>
+
+    <input type="text" id="classroomName"/>
+    <div id ="teacher_btn">
+        <button id="creat_classBTN">Add</button>
+    </div>
+
+    <h2>Room ID:</h2><input type="text" id="classroomID"/>
+    <h2>Teacher ID:</h2><input type="text" id="teachID"/>
+    <div id ="stud_btn">
+        <button id="add_classBTN">Add</button>
+    </div>
+
+
+    <br>
+    <h3><span id = "ListClass"></span></h3>
+
+    <div id="myList"></div>
+
+
+    <br>
+    <br>
+    <span ></span>
+    <button type="button" onclick="logout()">Logout</button>
 
 <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-auth.js"></script>
