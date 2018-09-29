@@ -3,27 +3,94 @@
 <head>
   <meta charset="utf-8">
   <title>Read University Home</title>
+  <style media="screen">
+    body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+    #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px 16px; border-radius: 3px; }
+    #message h3 { color: #f; font-weight: normal; font-size: 16px; margin: 16px 0 12px; }
+    #message h2 { color: #f00; font-weight: bold; font-size: 16px; margin: 0 0 8px; }{ color: #f00; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+    #message button {background: #5d8ffc;color: #fff;border: 1px solid #5d8ffc;border-radius: 5px;padding: 15px;display: block;width: 100%;  transition: 0.3s;-webkit-transition: 0.3s;-moz-transition: 0.3s;}
+    #message button:hover {background: #fff;color: #5d8ffc;border: 1px solid #5d8ffc;ursor: pointer;}
+    #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+    #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+    #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
+    #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+    #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
+    #IDsss { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px 16px; border-radius: 3px; }
+    #IDsss h3 { color: #f; font-weight: normal; font-size: 16px; margin: 16px 0 12px; }
+    #IDsss h2 { color: #f00; font-weight: bold; font-size: 16px; margin: 0 0 8px; }{ color: #f00; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+    #IDsss button {background: #5d8ffc;color: #fff;border: 1px solid #5d8ffc;border-radius: 5px;padding: 15px;display: block;width: 100%;  transition: 0.3s;-webkit-transition: 0.3s;-moz-transition: 0.3s;}
+    #IDss button:hover {background: #fff;color: #5d8ffc;border: 1px solid #5d8ffc;ursor: pointer;}
+    #IDsss h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+    #IDsss p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+    #IDsss a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
+    #IDsss, #loggedin a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+    #IDsss select { webkit-border-radius: 5px; moz-border-radius: 5px;border-radius: 5px;}
+    .blue    { background-color: #3b8ec2; }
+    #home { background: white; max-width: 350px; margin: 30px auto 20px; padding: 30px 25px 10px; border-radius: 30px; }
+    #home h3 { color: #f; font-weight: normal; font-size: 16px; margin: 16px 0 12px; }
+    #home h2 { color: #f00; font-weight: bold; font-size: 16px; margin: 0 0 8px; }{ color: #f00; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+    #home button {background: #5d8ffc;color: #fff;border: 1px solid #5d8ffc;border-radius: 5px;padding: 15px;display: block;width: 100%;  transition: 0.3s;-webkit-transition: 0.3s;-moz-transition: 0.3s;}
+    #home button:hover {background: #fff;color: #5d8ffc;border: 1px solid #5d8ffc;ursor: pointer;}
+    #home h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+    #home p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+    #home a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
+    #home, #loggedin a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+    #home select { webkit-border-radius: 5px; moz-border-radius: 5px;border-radius: 5px;}
+    .blue    { background-color: #3b8ec2; }
+    @media (max-width: 600px) {
+      body, #message { margin-top: 0; background: white; box-shadow: none; }
+      body, #home { margin-top: 0; background: white; box-shadow: none; }
+      body, #IDsss { margin-top: 0; background: white; box-shadow: none; }
+      body { border-top: 16px solid #ffa100; }
+
+    }
+  </style>
 </head>
 <body>
- <h4> Welcome: <span id ="homeName"></span></h4>
- <h4>Role: <span id = "homeRole"></span></h4>
- <br>
- <br>
- <h3><span id = "jobRole"></span></h3>
- <input type="text" id="classroomName"/>
- <div id ="teacher_btn">
-<button id="creat_classBTN">Create</button>
+
+
+  <div id ="message">
+
+    <h3>  ID: <p><span id="homeID"></span></p></h3>
+
+    <div id = "home">
+    <h4> Welcome: <span id ="homeName"></span></h4>
+    <h4>Role: <span id = "homeRole"></span></h4>
+    </div>
+    <br>
+    <br>
+    <h2><span id = "jobRole"></span></h2>
+
+
+    <input type="text" id="classroomName"/></br></br>
+    <div id ="teacher_btn">
+        <button id="creat_classBTN">Add</button>
+    </div>
+    <div "IDsss">
+    <div id="IDss">
+    <h2>Room ID:</h2><input type="text" id="classroomID"/>
+    <br><br>
+    <h2>Teacher ID:</h2><input type="text" id="teachID"/>
+<br><br>
+    <div id ="stud_btn">
+        <button id="add_classBTN">Add</button>
+    </div>
+  </div>
 </div>
-<!-- <button id = "createClassRoom" onclick="createClasses()">Create</button>  -->
-</br>
- <h3><span id = "ListClass"></span></h3>
- <div id="myList"></div>
- 
 
- <br> <br>
- <span ></span>
-<button type="button" onclick="logout()">Logout</button>
+    <br>
+    <div id= "message">
+    <h3><span id = "ListClass"></span></h3>
 
+    <div id="myList"></div>
+    <div id="myLista"></div>
+  </div>
+
+    <br>
+    <br>
+    <span ></span>
+    <button type="button" onclick="logout()">Logout</button>
+</div>
 <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-database.js"></script>
