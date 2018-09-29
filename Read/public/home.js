@@ -83,9 +83,9 @@ function login(){
           var li = document.createElement('li');
           ul.appendChild(li);
 
-              Object.keys(roomNames).forEach(function(key){
-                li.innerHTML += '<span onclick="clickDone(this)">'+roomNames[key]+'</span><ul style="display:none"><li>Class Id : '+classD+'</li><li><span onclick="clickDone(this)">Students :</span><ul style="display:none"><li>'+studentRawList+'</li></ul></li></ul>';
-              })
+            for(var x in roomNames){
+                li.innerHTML += '<span onclick="clickDone(this)">'+roomNames[x]+'</span><ul style="display:none"><li>Class Id : '+classD+'</li><li><span onclick="clickDone(this)">Students :</span><ul style="display:none"><li>'+studentRawList+'</li></ul></li></ul>';
+              }
                 })
               // document.getElementById("myLista").innerHTML = "Teacher here";
 
@@ -99,144 +99,23 @@ function login(){
         document.getElementById("ListClass").style.display = "initial";
         document.getElementById("add_classBTN").addEventListener("click",addclass);
 
+        var sjc = firebase.database().ref().child("StudentJoinedClass" +'/'+ user.displayName);
+        sjc.on('child_added', function(datum){
+          var mClass = datum.val().ClassName;
 
-
-               var userStudent = firebase.database().ref().child('Classes/' );
-                userStudent.on('child_added', function(data){
-
-                  var ctr= 0;
-                  var displayName = user.displayName;
-                  var Studentname = data.val().Studentname;
-                  var MyStudents = data.val().MyStudents;
-                  var TheClass = data.val().TheClass;
-                                // document.getElementById("myLista").innerHTML=suid;
-                                // console.log(suid);
-                 //
-                 //
-                 // var uidd = user.uid;
-                 // console.log(uidd);
-                 // document.getElementById("myLista").innerHTML=uidd;
-                 // console.log(user.uid);
-                 // for(var i in Studentname){
-                 //   if(Studentname[i] == displayName){
-                     console.log(displayName);
-                 //   }
-                   // console.log(ctr);
-
-                  // for(var i2 in student){
-                  //
-                  //     if(student[i2] == suid){
-                  //
-                  //       //student assigned to room
-                  //     console.log(this.data[i].val().TheClass);
-                  //
-                  //   }
-                  //
-                  // }
-
-                // }
-              })
-        // console.log(user.uid);
-        // var studentClassRef = firebase.database().ref().child('Classes' + '/' + user.uid);
-        //  studentClassRef.on('child_added', function(data){
-        //    console.log(user.uid);
-        //   //  for(i in this.data){
-        //   //
-        //   //   var uid = user.uid;
-        //   //
-        //   //   var student = this.data[i].val().Studentname;
-        //   //   console.log(uid);
-        //   //   // for(i2 in student){
-        //   //   //
-        //   //   //     if(student[i2] == uid){
-        //   //   //
-        //   //   //       //student assigned to room
-        //   //   //     // console.log(this.data[i].val().TheClass);
-        //   //   //
-        //   //   //   }
-        //   //   //
-        //   //   // }
-        //   //
-        //   // }
-        // })
-
-        // var studentClassRef = firebase.database().ref().child('Classes' + '/' + user.uid);
-        // studentClassRef.on('child_added', function(data){
-        //   var room_name = data.val().TheClass;
-        //   var room_students = data.val().MyStudents;
-        //   student_list = '';
-        //   for (var k in room_students){
-        //     student_list += (room_students[k].Studentname);
-        //   }
-        //     document.getElementById("myLista").innerHTML += student_list;
-        // })
-  //       var studentClassRef = firebase.database().ref().child('Classes' + '/' + user.uid);
-  //       studentClassRef.on('child_added', function(data){
-  //
-  //         var roomNamess = data.val().TheClass;
-  //         var Studentxx = data.val().MyStudents;
-  //         var classDD = data.val().ClassID;
-  //
-  //         var ul2 = document.createElement('ul');
-  //         document.getElementById('myLista').appendChild(ul2);
-  //         var li2 = document.createElement('li');
-  //         ul2.appendChild(li2);
-  //
-  //
-  //         var studentRawLists= '';
-  //         for (var keys in Studentxx) {
-  //           if(studentxx[keys].Studentname == user.displayName){
-  //             studentRawLists += ('['+Studentxx[keys].Studentname + ']');
-  //         }
-  //             Object.keys(roomNamess).forEach(function(keyz){
-  //               document.getElementById("myLista").innerHTML = "hi" + '<ul style="display:none"><li>' + roomNamess[keyz]; '</li></ul>';
-  //                             //'<span onclick="clickDone2(this)">'+roomNamess[keyz]+'</span><ul style="display:none"><li>Class Id : '+classDD+'</li><li><span onclick="clickDone(this)">Students :</span><ul style="display:none"><li>'+studentRawLists+'</li></ul></li></ul>';
-  //
-  //           // })
-  //
-  //
-  //       })
-  //     }
-  // })
-
-
-        // document.getElementById("myLista").innerHTML = "Student here";
+          myLista.innerHTML+= '<ul><li>'+mClass +'</li></ul>';
+          // var clist = '';
+          // for(var f in mClass){
+          //   clist += (mClass[f]);
+          // }
+          // myLista.innerHTML += clist
+        })
 
       }
       else{
           window.location.href = 'index.html';
       }
     })
-    // console.log(user.uid);
-    //
-    // var uidd = user.uid;
-    // var studentClassRef = firebase.database().ref().child('Classes' + '/' + user.uid);
-    //  studentClassRef.on('child_added', function(data){
-    //
-    //    var uidd = user.uid;
-    //
-    //    console.log(uidd);
-    //    // console.log(user.uid);
-    //   //  for(i in this.data){
-    //   //
-    //   //   var uid = user.uid;
-    //   //
-    //   //   var student = this.data[i].val().Studentname;
-    //   //   console.log(uid);
-    //   //   // for(i2 in student){
-    //   //   //
-    //   //   //     if(student[i2] == uid){
-    //   //   //
-    //   //   //       //student assigned to room
-    //   //   //     // console.log(this.data[i].val().TheClass);
-    //   //   //
-    //   //   //   }
-    //   //   //
-    //   //   // }
-    //   //
-    //   // }
-    // })
-    // console.log(user.uid);
 
   function addclass(){
     if (document.getElementById("classroomID").value == null ||  document.getElementById("classroomID").value =="" || document.getElementById("teachID").value == null || document.getElementById("teachID").value == "" ){

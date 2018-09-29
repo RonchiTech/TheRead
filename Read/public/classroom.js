@@ -134,30 +134,7 @@ function login(){
           })
         })
 
-        var studentRef = firebase.database().ref().child('Classes' + '/' + user.uid);
-          studentRef.on('child_added', function(data){
 
-            var roomNamess = data.val().TheClass;
-            var Studentxx = data.val().MyStudents;
-
-            var studentRawLists = '';
-            for (var keys in Studentxx) {
-              if(studentxx[keys].Studentname  == user.displayName){
-                studentRawLists += ('['+Studentxx[keys].Studentname + ']');
-
-            }
-          }
-          var classDD = data.val().ClassID;
-          var ull = document.createElement('ul');
-          document.getElementById('myLista').appendChild(ull);
-          var lii = document.createElement('li');
-          ull.appendChild(lii);
-
-          Object.keys(roomNamess).forEach(function(key){
-          lii.innerHTML += "hi";
-            })
-
-          })
 
           function errData(err)
            {
