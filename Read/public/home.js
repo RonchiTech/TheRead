@@ -48,6 +48,7 @@ function login(){
     document.getElementById("homeRole").innerHTML = user.status;
 
     var classuid = generateId();
+    var databaseREF = firebase.database().ref();
     var useROLE = document.getElementById("homeRole");
     var fbclass = firebase.database().ref().child('Classes');
     var fbstat = firebase.database().ref().child('Accounts/' + user.uid +'/status');
@@ -118,7 +119,7 @@ function login(){
                  // console.log(user.uid);
                  // for(var i in Studentname){
                  //   if(Studentname[i] == displayName){
-                     console.log(Studentname);
+                     console.log(displayName);
                  //   }
                    // console.log(ctr);
 
@@ -238,7 +239,7 @@ function login(){
     // console.log(user.uid);
 
   function addclass(){
-    if (document.getElementById("classroomID").value == nul ||  document.getElementById("classroomID").value =="" || document.getElementById("teachID").value == null || document.getElementById("teachID").value == "" ){
+    if (document.getElementById("classroomID").value == null ||  document.getElementById("classroomID").value =="" || document.getElementById("teachID").value == null || document.getElementById("teachID").value == "" ){
          window.alert("Empty Input Field!");
     }else{
       var addclassID = document.getElementById("classroomID").value;
@@ -249,9 +250,29 @@ function login(){
       classRef.orderByChild("ClassID").equalTo(addclassID).once("child_added", function(snapshot) {
       var studentsRef = snapshot.ref.child("MyStudents");
       studentsRef.child(studentUID).set({ Studentname: studentName });
-    })
 
+    })
+    var connectClassInfo = firebase.database().ref().child('Classes');
+    connectClassInfo.on('child_added', function(snap){
+      var teacherID = snap.val().TeacherID;
+      var roomID = snap.val().ClassID;
+      var room = snap.val().TheClass;
+      var classex = snap.val();
+      var myClassRoom = '';
+      for(var q in classex){
+        if(classex[q].ClassID == addclassID ){
+       myClassRoom += (classex[q].TheClass);
+        }
+      }
+    var joinedClass={};
+    joinedClass.ClassID = addclassID;
+    joinedClass.ClassName = myClassRoom;
+    var FireBaseR = firebase.database().ref();
+    FireBaseR.child("StudentJoinedClass").child(user.displayName).push().set(joinedClass);
+      window.alert("You Successfully Joined A Class!")
+      })
   }
+
   document.getElementById("classroomID").value = "";
   document.getElementById("teachID").value = "";
 
@@ -269,6 +290,7 @@ function login(){
         myClasses.TeacherID = user.uid;
         myClasses.ClassID = usuid;
         fbclass.child(user.uid).push().set(myClasses);
+        databaseREF.child("ClassInfo").child(user.displayName).child(usuid).set(myClasses);
 
         // var usuid = generateId();
         // var myClasses={};
